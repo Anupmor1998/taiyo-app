@@ -11,7 +11,7 @@ function MainLayout() {
           <Sidebar />
         </div>
 
-        <div className="w-full h-full px-6 py-4">
+        <div className="w-full h-full px-6 py-4 overflow-y-auto scrollbar-thin scrollbar-track-gray-300 scrollbar-thumb-blue-500">
           <Outlet />
         </div>
       </div>
