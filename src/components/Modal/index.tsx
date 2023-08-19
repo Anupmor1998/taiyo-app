@@ -9,7 +9,7 @@ interface Props {
 const Modal = ({ children, open, handleClose }: Props) => {
   return open ? (
     <div className="absolute inset-0 z-10 flex items-center justify-center w-screen h-screen overflow-hidden bg-black/50">
-      <div className="relative w-full max-w-md p-4 bg-white rounded-lg">
+      <div className="relative w-[90%] md:w-full max-w-md p-4 bg-white rounded-lg">
         <div
           role="button"
           tabIndex={0}

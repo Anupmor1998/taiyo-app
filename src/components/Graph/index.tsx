@@ -24,6 +24,7 @@ ChartJS.register(
 
 export const options = {
   responsive: true,
+  maintainAspectRatio: false,
   plugins: {
     legend: {
       position: 'top' as const,
@@ -61,11 +62,11 @@ const Graph = () => {
   };
 
   return (
-    <div className="w-full h-[calc(100vh-4.5rem)]">
+    <div className="w-full">
       {isLoading ? (
         <DataLoader />
       ) : (
-        <div className="w-full h-full">
+        <div className="w-full h-[50vh] lg:h-[calc(100vh-4.5rem)]">
           <Line options={options} data={lineData} />
         </div>
       )}
