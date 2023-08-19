@@ -11,6 +11,7 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import DataLoader from '../DataLoader';
+import { convertToAverageMonthCases } from '../../utils';
 
 ChartJS.register(
   CategoryScale,
@@ -46,17 +47,31 @@ export const options = {
 const Graph = () => {
   const { data, isLoading } = useGraph();
 
-  const labels = data && Object.keys(data);
-  const caseData = labels && labels.map((label: string) => data[label]);
+  const averageMonthCases = convertToAverageMonthCases(data?.cases);
+  const averageLabels = averageMonthCases && Object.keys(averageMonthCases);
+  const averageMonthDeaths = convertToAverageMonthCases(data?.deaths);
+  const averageMonthRecovered = convertToAverageMonthCases(data?.recovered);
 
   const lineData = {
-    labels: labels || [],
+    labels: averageLabels || [],
     datasets: [
       {
         label: 'Cases',
-        data: caseData || [],
+        data: averageMonthCases || [],
         borderColor: 'rgb(255, 99, 132)',
         backgroundColor: 'rgba(255, 99, 132, 0.5)',
+      },
+      {
+        label: 'Deaths',
+        data: averageMonthDeaths || [],
+        borderColor: 'rgb(75, 192, 192)',
+        backgroundColor: 'rgb(75, 192, 192,0.5)',
+      },
+      {
+        label: 'Recovered',
+        data: averageMonthRecovered || [],
+        borderColor: 'rgb(53, 162, 235)',
+        backgroundColor: 'rgba(53, 162, 235, 0.5)',
       },
     ],
   };
