@@ -10,6 +10,7 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
+import DataLoader from '../DataLoader';
 
 ChartJS.register(
   CategoryScale,
@@ -42,7 +43,7 @@ export const options = {
 };
 
 const Graph = () => {
-  const { data } = useGraph();
+  const { data, isLoading } = useGraph();
 
   const labels = data && Object.keys(data);
   const caseData = labels && labels.map((label: string) => data[label]);
@@ -60,10 +61,14 @@ const Graph = () => {
   };
 
   return (
-    <div className="w-full">
-      <div className="w-full h-full">
-        <Line options={options} data={lineData} />
-      </div>
+    <div className="w-full h-[calc(100vh-4.5rem)]">
+      {isLoading ? (
+        <DataLoader />
+      ) : (
+        <div className="w-full h-full">
+          <Line options={options} data={lineData} />
+        </div>
+      )}
     </div>
   );
 };
