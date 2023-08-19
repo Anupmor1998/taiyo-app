@@ -1,9 +1,9 @@
-import Modal from '../Modal';
+import Modal from '../../components/Modal';
 import { useContact } from '../../hooks/useContact';
 import { BiError } from 'react-icons/bi';
-import Card from '../Card';
+import Card from '../../components/Card';
 
-const Contact = () => {
+const ContactPage = () => {
   const {
     contacts,
     formValues,
@@ -194,4 +194,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default ContactPage;

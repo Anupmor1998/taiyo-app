@@ -7,7 +7,8 @@ import {
 } from 'react-router-dom';
 import Loader from '../components/Loader';
 
-const Contact = lazy(() => import('../components/Contact'));
+const ContactPage = lazy(() => import('../views/Contact'));
+const Dashboard = lazy(() => import('../views/Dashboard'));
 const MainLayout = lazy(() => import('../layouts/MainLayout'));
 
 const MainRoutes = () => {
@@ -16,8 +17,10 @@ const MainRoutes = () => {
       <Router>
         <Routes>
           <Route path="/" element={<MainLayout />}>
-            <Route path="contact" element={<Contact />} />
-            <Route path="/" element={<Navigate to="contact" replace />} />
+            <Route path="contact" element={<ContactPage />} />
+            <Route path="dashboard" element={<Dashboard />} />
+
+            <Route path="/" element={<Navigate to="dashboard" replace />} />
           </Route>
         </Routes>
       </Router>
