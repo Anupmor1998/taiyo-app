@@ -11,7 +11,7 @@ const Contact = () => {
     errors,
     isEdit,
     selectedId,
-    addContact,
+    handleAddContact,
     editContact,
     handleChange,
     handleClose,
@@ -148,7 +148,7 @@ const Contact = () => {
               if (isEdit) {
                 editContact(formValues);
               } else {
-                addContact(formValues);
+                handleAddContact(formValues);
               }
             }}
             className="w-full px-3 py-2 text-base font-bold text-white transition-all duration-300 ease-in-out bg-blue-500 rounded-lg outline-none focus:ring-4 focus:ring-blue-300 hover:bg-blue-600"

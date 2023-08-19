@@ -1,14 +1,17 @@
-import { useEffect, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import { ContactType } from '../types';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import {
+  addConatct,
+  deleteConatct,
+  editConatct,
+} from '../redux/slices/contactSlice';
+import { useState } from 'react';
 
 export const useContact = () => {
+  const contacts = useAppSelector((state) => state.contacts);
+  const dispatch = useAppDispatch();
   const [selectedId, setSelectedId] = useState<string>('');
-  const [contacts, setContacts] = useState<ContactType[]>(() =>
-    localStorage.getItem('contacts')
-      ? JSON.parse(localStorage.getItem('contacts')!)
-      : []
-  );
+
   const [formValues, setFormValues] = useState<ContactType>(() => ({
     id: '',
     firstName: '',
@@ -73,17 +76,9 @@ export const useContact = () => {
     return isValid;
   };
 
-  const addContact = (contact: ContactType) => {
+  const handleAddContact = (contact: ContactType) => {
     if (!validateForm()) return;
-    setContacts((prev) => [
-      ...prev,
-      {
-        id: uuidv4(),
-        firstName: contact.firstName,
-        lastName: contact.lastName,
-        status: contact.status,
-      },
-    ]);
+    dispatch(addConatct(contact));
     handleClose();
   };
 
@@ -95,11 +90,7 @@ export const useContact = () => {
 
   const editContact = (contact: ContactType) => {
     if (!validateForm()) return;
-    setContacts((prev) => {
-      const index = prev.findIndex((item) => item.id === contact.id);
-      prev[index] = contact;
-      return [...prev];
-    });
+    dispatch(editConatct(contact));
     handleClose();
   };
 
@@ -109,19 +100,15 @@ export const useContact = () => {
   };
 
   const deleteContact = (id: string) => {
-    setContacts((prev) => prev.filter((item) => item.id !== id));
+    dispatch(deleteConatct(id));
     handleClose();
   };
-
-  useEffect(() => {
-    localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts]);
 
   return {
     contacts,
     formValues,
     setFormValues,
-    addContact,
+    handleAddContact,
     editContact,
     deleteContact,
     open,

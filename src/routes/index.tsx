@@ -5,10 +5,10 @@ import {
   BrowserRouter as Router,
   Navigate,
 } from 'react-router-dom';
+import Loader from '../components/Loader';
 
 const Contact = lazy(() => import('../components/Contact'));
 const MainLayout = lazy(() => import('../layouts/MainLayout'));
-const Loader = lazy(() => import('../components/Loader'));
 
 const MainRoutes = () => {
   return (
